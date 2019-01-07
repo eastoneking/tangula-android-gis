@@ -56,10 +56,10 @@ public class GPSTracker {
 
 
     // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    private static long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 60000; // 1 minute
+    private static long MIN_TIME_BW_UPDATES = 60000; // 1 minute
 
     private static final List<CallbackFuncSet> CALLBACKS = new LinkedList<>();
 
