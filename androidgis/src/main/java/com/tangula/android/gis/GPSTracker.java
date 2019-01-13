@@ -58,8 +58,12 @@ public class GPSTracker {
     // The minimum distance to change Updates in meters
     public static long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
-    // The minimum time between updates in milliseconds
-    public static long MIN_TIME_BW_UPDATES = 60000; // 1 minute
+    /**
+     * The minimum time between updates in milliseconds.
+     *
+     * The default value is 5 seconds.
+      */
+    public static long MIN_TIME_BW_UPDATES = 5000; // 5 seconds
 
     private static final List<CallbackFuncSet> CALLBACKS = new LinkedList<>();
 
@@ -231,6 +235,10 @@ public class GPSTracker {
                                     LocationManager.NETWORK_PROVIDER,
                                     MIN_TIME_BW_UPDATES,
                                     MIN_DISTANCE_CHANGE_FOR_UPDATES, LISTENER);
+                            Location loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            if(loc!=null){
+                                LISTENER.onLocationChanged(loc);
+                            }
                         }
                     }, onNotGrantPermission);
                 }
@@ -244,9 +252,15 @@ public class GPSTracker {
                                     LocationManager.GPS_PROVIDER,
                                     MIN_TIME_BW_UPDATES,
                                     MIN_DISTANCE_CHANGE_FOR_UPDATES, LISTENER);
+                            Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if(loc!=null){
+                                LISTENER.onLocationChanged(loc);
+                            }
                         }
                     }, onNotGrantPermission);
                 }
+
+
             }
 
         } catch (Exception e) {
